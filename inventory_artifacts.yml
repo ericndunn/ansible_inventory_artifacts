@@ -1,0 +1,11 @@
+---
+- hosts: "all"
+  gather_facts: true
+  roles: [ansible_inventory]
+  vars: 
+  vars_files: [ansible_inventory/vars/main.yml] 
+   
+
+
+
+  
