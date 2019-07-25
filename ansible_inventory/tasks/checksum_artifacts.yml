@@ -22,10 +22,10 @@
     msg: 
       - "{{ debug_out.results | map(attribute='msg') | list }}"
 
-- name: "Output Information to {{ lookup('env','WORKSPACE') }}/myfile"
+- name: "Output Information to {{ lookup('env','WORKSPACE') }}/{{ lookup('pipe','date +%Y%m%d') }}_{{ lookup('env','BUILD_ID') }}.csv"
   lineinfile:
-    dest: "{{ lookup('env','WORKSPACE') }}/myfile"
-    line: "{{ debug_out.results | map(attribute='msg') | list }}"
+    dest: "{{ lookup('env','WORKSPACE') }}/{{ lookup('pipe','date +%Y%m%d') }}_{{ lookup('env','BUILD_ID') }}.csv"
+    line: "{{ debug_out.results | map(attribute='msg') | regex_replace('\\[|u(?!sers)|\\]', '') }}"
     create: true
     state: present
   delegate_to: localhost
