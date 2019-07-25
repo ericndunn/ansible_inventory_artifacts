@@ -16,16 +16,20 @@
   with_together:
     - "{{ server_war_files.files | json_query('[].path[]') | list }}"
     - "{{ server_war_files.files | json_query('[].checksum[]') | list }}"
-  register: debug_out   
+  register: debug_out
 
-- name: "Output Information to WASL_PROD_{{ lookup('pipe','date +%Y%m%d') }}.csv"
-  lineinfile:
-    dest: "OUT_{{ lookup('pipe','date +%Y%m%d') }}.csv"
-    line: "{{ debug_out }}"
-    # line: "{{ inventory_hostname }},{{ debug_out.stdout_lines | regex_replace('\\[|u(?!sers)|\\]', '') }}"    
-    create: true
-    state: present
-  delegate_to: localhost
+- debug:
+    msg: 
+      - "{{ debug_out }}"     
+
+# - name: "Output Information to WASL_PROD_{{ lookup('pipe','date +%Y%m%d') }}.csv"
+#   lineinfile:
+#     dest: "OUT_{{ lookup('pipe','date +%Y%m%d') }}.csv"
+#     line: "{{ debug_out }}"
+#     # line: "{{ inventory_hostname }},{{ debug_out.stdout_lines | regex_replace('\\[|u(?!sers)|\\]', '') }}"    
+#     create: true
+#     state: present
+#   delegate_to: localhost
 
 # - name: Remove single quotes
 #   replace:
