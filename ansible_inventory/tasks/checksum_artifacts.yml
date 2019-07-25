@@ -24,7 +24,7 @@
 
 - name: "Output Information to myfile"
   lineinfile:
-    dest: /Users/ag19884/repos/ansible_inventory_artifacts
+    dest: /Users/ag19884/repos/ansible_inventory_artifacts/myfile
     line: "mycontent"
     create: true
     state: present
