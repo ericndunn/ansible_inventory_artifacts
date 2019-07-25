@@ -33,7 +33,7 @@
 - name: Remove single quotes
   replace:
     path: "{{ lookup('env','WORKSPACE') }}/PROD_WARS_{{ lookup('pipe','date +%Y%m%d') }}_{{ lookup('env','BUILD_ID') }}.csv"
-    regexp: "["
+    regexp: ""
     replace: ""
   delegate_to: localhost
 
