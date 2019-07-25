@@ -20,16 +20,18 @@
 
 - debug:
     msg: 
-      - "{{ debug_out.results | map(attribute='msg') | list }}"     
+      - "{{ debug_out.results | map(attribute='msg') | list }}"
 
-- name: "Output Information to WASL_PROD_{{ lookup('pipe','date +%Y%m%d') }}.csv"
-  lineinfile:
-    dest: "WASL_PROD_{{ lookup('pipe','date +%Y%m%d') }}.csv"
-    line: "DID THIS WORK?"
-    # line: "{{ inventory_hostname }},{{ debug_out.stdout_lines | regex_replace('\\[|u(?!sers)|\\]', '') }}"    
-    create: true
-    state: present
-  delegate_to: localhost
+- local_action: lineinfile line="{{ debug_out.results | map(attribute='msg') | list }}" path="WASL_PROD_{{ lookup('pipe','date +%Y%m%d') }}.csv"           
+
+# - name: "Output Information to WASL_PROD_{{ lookup('pipe','date +%Y%m%d') }}.csv"
+#   lineinfile:
+#     dest: "WASL_PROD_{{ lookup('pipe','date +%Y%m%d') }}.csv"
+#     line: "DID THIS WORK?"
+#     # line: "{{ inventory_hostname }},{{ debug_out.stdout_lines | regex_replace('\\[|u(?!sers)|\\]', '') }}"    
+#     create: true
+#     state: present
+#   delegate_to: localhost
 
 # - name: Remove single quotes
 #   replace:
