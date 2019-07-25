@@ -21,7 +21,7 @@
 - name: "Output Information to WASL_PROD_{{ lookup('pipe','date +%Y%m%d') }}.csv"
   lineinfile:
     dest: "OUT_{{ lookup('pipe','date +%Y%m%d') }}.csv"
-    line: "{{ debug_out.stdout_lines }}"
+    line: "{{ debug_out }}"
     # line: "{{ inventory_hostname }},{{ debug_out.stdout_lines | regex_replace('\\[|u(?!sers)|\\]', '') }}"    
     create: true
     state: present
