@@ -12,7 +12,7 @@
   #when: p.stat.isdir is defined and p.stat.isdir
 - name: item.0 returns from the first list, item.1 returns from the second list
   debug:
-    msg: "{{ item.0 }},{{ item.1 }}"
+    msg: "{{ item.0 }},{{ item.1 }}\n"
   with_together:
     - "{{ server_war_files.files | json_query('[].path[]') | list }}"
     - "{{ server_war_files.files | json_query('[].checksum[]') | list }}"
@@ -30,12 +30,12 @@
     state: present
   delegate_to: localhost
 
-- name: Remove single quotes
-  replace:
-    path: "{{ lookup('env','WORKSPACE') }}/PROD_WARS_{{ lookup('pipe','date +%Y%m%d') }}_{{ lookup('env','BUILD_ID') }}.csv"
-    regexp: "["
-    replace: ""
-  delegate_to: localhost
+# - name: Remove single quotes
+#   replace:
+#     path: "{{ lookup('env','WORKSPACE') }}/PROD_WARS_{{ lookup('pipe','date +%Y%m%d') }}_{{ lookup('env','BUILD_ID') }}.csv"
+#     regexp: "["
+#     replace: ""
+#   delegate_to: localhost
 
 # - name: Replace comma-space with comma.
 #   replace:
