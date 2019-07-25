@@ -22,7 +22,7 @@
     msg: 
       - "{{ debug_out.results | map(attribute='msg') | list }}"
 
-- name: "Output Information to PROD_WARS_{{ lookup('env','WORKSPACE') }}/{{ lookup('pipe','date +%Y%m%d') }}_{{ lookup('env','BUILD_ID') }}.csv"
+- name: "Output Information to {{ lookup('env','WORKSPACE') }}/{{ lookup('pipe','date +%Y%m%d') }}_{{ lookup('env','BUILD_ID') }}.csv"
   lineinfile:
     dest: "{{ lookup('env','WORKSPACE') }}/PROD_WARS_{{ lookup('pipe','date +%Y%m%d') }}_{{ lookup('env','BUILD_ID') }}.csv"
     line: "{{ debug_out.results | map(attribute='msg') | list }}"
@@ -30,12 +30,12 @@
     state: present
   delegate_to: localhost
 
-# - name: Remove single quotes
-#   replace:
-#     path: "OUT_{{ lookup('pipe','date +%Y%m%d') }}.csv"
-#     regexp: "'"
-#     replace: ""
-#   delegate_to: localhost
+- name: Remove single quotes
+  replace:
+    path: "{{ lookup('env','WORKSPACE') }}/PROD_WARS_{{ lookup('pipe','date +%Y%m%d') }}_{{ lookup('env','BUILD_ID') }}.csv"
+    regexp: "['"
+    replace: ""
+  delegate_to: localhost
 
 # - name: Replace comma-space with comma.
 #   replace:
