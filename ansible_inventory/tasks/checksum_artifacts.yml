@@ -18,9 +18,9 @@
     - "{{ server_war_files.files | json_query('[].checksum[]') | list }}"
   register: debug_out   
 
-- name: "Output Information to WASL_PROD_{{ lookup('pipe','date +%Y%m%d') }}_{{ build_id }}.csv"
+- name: "Output Information to WASL_PROD_{{ lookup('pipe','date +%Y%m%d') }}.csv"
   lineinfile:
-    dest: "OUT_{{ lookup('pipe','date +%Y%m%d') }}_{{ build_id }}.csv"
+    dest: "OUT_{{ lookup('pipe','date +%Y%m%d') }}.csv"
     line: "{{ inventory_hostname }},{{ debug_out.stdout_lines | regex_replace('\\[|u(?!sers)|\\]', '') }}"
     create: true
     state: present
@@ -28,14 +28,14 @@
 
 - name: Remove single quotes
   replace:
-    path: "OUT_{{ lookup('pipe','date +%Y%m%d') }}_{{ build_id }}.csv"
+    path: "OUT_{{ lookup('pipe','date +%Y%m%d') }}.csv"
     regexp: "'"
     replace: ""
   delegate_to: localhost
 
 - name: Replace comma-space with comma.
   replace:
-    path: "OUT_{{ lookup('pipe','date +%Y%m%d') }}_{{ build_id }}.csv"
+    path: "OUT_{{ lookup('pipe','date +%Y%m%d') }}.csv"
     regexp: ", "
     replace: ","
   delegate_to: localhost        
