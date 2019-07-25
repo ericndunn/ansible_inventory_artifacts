@@ -25,7 +25,7 @@
 - name: "Output Information to PROD_WARS_{{ lookup('env','WORKSPACE') }}/{{ lookup('pipe','date +%Y%m%d') }}_{{ lookup('env','BUILD_ID') }}.csv"
   lineinfile:
     dest: "{{ lookup('env','WORKSPACE') }}/PROD_WARS_{{ lookup('pipe','date +%Y%m%d') }}_{{ lookup('env','BUILD_ID') }}.csv"
-    line: "{{ debug_out.results | map(attribute='msg') | regex_replace('[', '') }}"
+    line: "{{ debug_out.results | map(attribute='msg') }}"
     create: true
     state: present
   delegate_to: localhost
