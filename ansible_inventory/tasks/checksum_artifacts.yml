@@ -22,10 +22,10 @@
     msg: 
       - "{{ debug_out.results | map(attribute='msg') | list }}"
 
-- name: "Output Information to myfile"
+- name: "Output Information to {{ lookup('env','WORKSPACE') }}/myfile"
   lineinfile:
-    dest: /Users/ag19884/repos/ansible_inventory_artifacts/myfile
-    line: "mycontent"
+    dest: "{{ lookup('env','WORKSPACE') }}/myfile"
+    line: "{{ debug_out.results | map(attribute='msg') | list }}"
     create: true
     state: present
   delegate_to: localhost
