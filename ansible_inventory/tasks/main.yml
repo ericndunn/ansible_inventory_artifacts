@@ -1,2 +1,23 @@
 ---
-# tasks file for ansible_inventory
+## tasks file for ansible_inventory
+- name: "Get server_facts facts"
+  setup:
+  run_once: true  
+  delegate_facts: True
+  register: server_facts
+
+- name: "Get inventory facts"
+  setup:
+  register: inventory_facts  
+
+- name: "DEBUG: Get server_facts facts"  
+  debug:
+    msg: 
+      - "LOCAL START" 
+      - "{{ server_facts }}"
+      - "INVENTORY START"
+      - "{{ inventory_facts }}"
+  run_once: true 
+
+- include_tasks: checksum_artifacts.yml
+

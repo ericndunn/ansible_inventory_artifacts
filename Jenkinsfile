@@ -1,8 +1,8 @@
 pipeline {
     agent { label 'MASTER' }
         parameters {
-            string(defaultValue: "test_inventory", description: 'Ansible Host file', name: 'INV_FILE')
-            string(defaultValue: "FS-AA-PERF-WAS", description: 'Ansible Host Group', name: 'INV_GRP')   
+            string(defaultValue: "prod_was_inventory", description: 'Ansible Host file', name: 'INV_FILE')
+            string(defaultValue: "AA-PROD-WAS", description: 'Ansible Host Group', name: 'INV_GRP')   
             // choice(choices: ['DEV', 
             //             'DEV1', 
             //             'DEV2', 
@@ -20,7 +20,7 @@ pipeline {
             //             'UAT3'], 
             //             description: 'UI Environment', 
             //             name: 'UI_ENV')
-            string(defaultValue: "https://confluence.anthem.com/display/MAAA/WSR+-+Dead+Pool", description: 'WSR URL', name: 'WSR_URL')                          
+            // string(defaultValue: "https://confluence.anthem.com/display/MAAA/WSR+-+Dead+Pool", description: 'WSR URL', name: 'WSR_URL')                          
             // choice(choices: ['contents-commercial-rest-war', 
             //             'contents-commercial-rest-war', 
             //             'ma-authentication-war', 
@@ -28,8 +28,8 @@ pipeline {
             //             description: 'War Files', 
             //             name: 'WAR_FILES')
             // string(defaultValue: '8.0.308', description: 'IHS Version', name: 'IHS_VERSION')
-            string(defaultValue: 'YOUR_USER_ID', description: 'Artifictory User ID', name: 'MY_USERID')
-            password(defaultValue: '', description: 'Artifactory Password', name: 'MY_PASSWORD')
+            //string(defaultValue: 'YOUR_USER_ID', description: 'Artifictory User ID', name: 'MY_USERID')
+            //password(defaultValue: '', description: 'Artifactory Password', name: 'MY_PASSWORD')
 //             text(name: 'MY_FILE_LIST', 
 //                 defaultValue: '''https://artifactory.anthem.com/artifactory/maven-releases/com/anthem/madt/ui/${UI_ENV}/${IHS_VERSION}/ABC-${IHS_VERSION}.tar.gz
 // https://artifactory.anthem.com/artifactory/maven-releases/com/anthem/madt/ui/${UI_ENV}/${IHS_VERSION}/EBCBS-${IHS_VERSION}.tar.gz
