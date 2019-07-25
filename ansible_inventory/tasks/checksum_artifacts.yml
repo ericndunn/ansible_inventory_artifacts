@@ -12,7 +12,7 @@
   #when: p.stat.isdir is defined and p.stat.isdir
 - name: item.0 returns from the first list, item.1 returns from the second list
   debug:
-    msg: "{{ item.0 }},{{ item.1 }}\n"
+    msg: "{{ item.0 }},{{ item.1 }} | split(',')"
   with_together:
     - "{{ server_war_files.files | json_query('[].path[]') | list }}"
     - "{{ server_war_files.files | json_query('[].checksum[]') | list }}"
