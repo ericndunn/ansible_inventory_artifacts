@@ -20,7 +20,7 @@
 
 - debug:
     msg: 
-      - "{{ debug_out }}"     
+      - "{{ debug_out.results | map(attribute='msg') | list }}"     
 
 # - name: "Output Information to WASL_PROD_{{ lookup('pipe','date +%Y%m%d') }}.csv"
 #   lineinfile:
